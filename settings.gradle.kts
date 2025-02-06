@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "ComposeDemo"
 include(":app")
-include(":baidu_asr_core")
