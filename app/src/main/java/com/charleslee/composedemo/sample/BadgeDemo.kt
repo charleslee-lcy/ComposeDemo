@@ -3,7 +3,9 @@ package com.charleslee.composedemo.sample
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MailOutline
@@ -29,7 +31,7 @@ import androidx.compose.ui.unit.dp
  * 15708478830@163.com
  */
 @Composable
-fun BadgeExample() {
+private fun BadgeExample() {
     Row(modifier = Modifier.fillMaxWidth()) {
         BadgedBox(
             badge = {
@@ -87,7 +89,7 @@ fun BadgeExample() {
 }
 
 @Composable
-fun BadgeLabel(text: String = "") {
+private fun BadgeLabel(text: String = "") {
     Badge(
         containerColor = Color.Red,
         contentColor = Color.White
@@ -103,15 +105,11 @@ fun BadgeInteractiveExample() {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        BadgeExample()
+        Spacer(modifier = Modifier.fillMaxWidth().height(30.dp))
         BadgedBox(
             badge = {
                 if (itemCount > 0) {
-//                    Badge(
-//                        containerColor = Color.Red,
-//                        contentColor = Color.White
-//                    ) {
-//                        Text("$itemCount")
-//                    }
                     BadgeLabel("已选$itemCount")
                 }
             }
