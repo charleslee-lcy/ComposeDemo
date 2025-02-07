@@ -1,0 +1,172 @@
+package com.charleslee.composedemo.sample
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Card
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import com.charleslee.composedemo.R
+
+
+/**
+ * 对话框示例
+ * <p> Created by CharlesLee on 2025/2/7
+ * 15708478830@163.com
+ */
+@Composable
+fun testDialog() {
+    val openAlertDialog = remember { mutableStateOf(false) }
+
+    FloatingActionButton(onClick = {
+        openAlertDialog.value = true
+    }) {
+        Icon(
+            imageVector = Icons.Filled.Add,
+            contentDescription = "Localized description"
+        )
+    }
+
+//    if (openAlertDialog.value) {
+//        AlertDialogExample(
+//            onConfirm = {
+//                openAlertDialog.value = false
+//                println("Confirmation registered") // Add logic here to handle confirmation.
+//            },
+//            onDismiss = { openAlertDialog.value = false },
+//            dialogTitle = "Alert dialog example",
+//            dialogText = "This is an example of an alert dialog with buttons.",
+//            icon = Icons.Default.Info
+//        )
+//    }
+
+    if (openAlertDialog.value) {
+        CustomDialogExample(
+            onConfirm = {
+                openAlertDialog.value = false
+                println("Confirmation registered") // Add logic here to handle confirmation.
+            },
+            onDismiss = { openAlertDialog.value = false },
+            dismissOnTouchOutside = false
+        ) {
+            ChipExample()
+        }
+    }
+}
+
+@Composable
+fun AlertDialogExample(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+    dialogTitle: String,
+    dialogText: String,
+    icon: ImageVector,
+    dismissOnTouchOutside: Boolean = true,
+) {
+    AlertDialog(
+        icon = {
+            Icon(icon, contentDescription = "Example Icon")
+        },
+        title = {
+            Text(text = dialogTitle)
+        },
+        text = {
+            Text(text = dialogText)
+        },
+        onDismissRequest = {
+            if (dismissOnTouchOutside) {
+                onDismiss()
+            }
+        },
+        confirmButton = {
+            TextButton(
+                onClick = {
+                    onConfirm()
+                }
+            ) {
+                Text("Confirm")
+            }
+        },
+        dismissButton = {
+            TextButton(
+                onClick = {
+                    onDismiss()
+                }
+            ) {
+                Text("Dismiss")
+            }
+        }
+    )
+}
+
+@Composable
+fun CustomDialogExample(
+    onConfirm: () -> Unit,
+    onDismiss: () -> Unit,
+    dismissOnTouchOutside: Boolean = true,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    Dialog(onDismissRequest = { if (dismissOnTouchOutside) onDismiss() }) {
+        // Draw a rectangle shape with rounded corners inside the dialog
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(375.dp)
+                .padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                content()
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    TextButton(
+                        onClick = { onDismiss() },
+                        modifier = Modifier.padding(8.dp),
+                    ) {
+                        Text("Dismiss")
+                    }
+                    TextButton(
+                        onClick = { onConfirm() },
+                        modifier = Modifier.padding(8.dp),
+                    ) {
+                        Text("Confirm")
+                    }
+                }
+            }
+        }
+    }
+}
