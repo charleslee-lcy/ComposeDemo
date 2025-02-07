@@ -68,6 +68,7 @@ fun BadgeExample() {
                 contentDescription = "Menu"
             )
         }
+
         BadgedBox(
             badge = {
                 Badge(
