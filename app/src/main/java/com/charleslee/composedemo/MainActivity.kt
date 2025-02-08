@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices.PIXEL_4
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +24,7 @@ import com.charleslee.composedemo.sample.BadgeInteractiveExample
 import com.charleslee.composedemo.sample.BottomSheetExample
 import com.charleslee.composedemo.sample.ChipExample
 import com.charleslee.composedemo.sample.ConstraintLayoutExample
+import com.charleslee.composedemo.sample.DrawerExample
 import com.charleslee.composedemo.sample.MediumTopAppBarExample
 import com.charleslee.composedemo.sample.testDialog
 import com.charleslee.composedemo.ui.theme.ComposeDemoTheme
@@ -47,17 +49,20 @@ fun Greeting(name: String) {
             .fillMaxSize()
             .padding(start = 14.dp, end = 14.dp)
     ) {
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(30.dp)
-        )
+//        Spacer(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .height(30.dp)
+//        )
 //        MediumTopAppBarExample()
 //        ConstraintLayoutExample()
 //        BadgeInteractiveExample()
 //        BottomSheetExample()
 //        ChipExample()
-        testDialog()
+//        testDialog()
+        DrawerExample {
+            MediumTopAppBarExample()
+        }
     }
 }
 
