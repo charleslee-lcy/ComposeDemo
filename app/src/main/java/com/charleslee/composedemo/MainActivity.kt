@@ -25,6 +25,8 @@ import com.charleslee.composedemo.sample.BottomSheetExample
 import com.charleslee.composedemo.sample.ChipExample
 import com.charleslee.composedemo.sample.ConstraintLayoutExample
 import com.charleslee.composedemo.sample.DrawerExample
+import com.charleslee.composedemo.sample.ListExample
+import com.charleslee.composedemo.sample.LoginScreen
 import com.charleslee.composedemo.sample.MediumTopAppBarExample
 import com.charleslee.composedemo.sample.testDialog
 import com.charleslee.composedemo.ui.theme.ComposeDemoTheme
@@ -60,9 +62,14 @@ fun Greeting(name: String) {
 //        BottomSheetExample()
 //        ChipExample()
 //        testDialog()
-        DrawerExample {
-            MediumTopAppBarExample()
-        }
+//        DrawerExample {
+//            MediumTopAppBarExample()
+//        }
+        LoginScreen()
+//        val data = 1..100
+//        ListExample(data.map {
+//            it.toString()
+//        })
     }
 }
 
