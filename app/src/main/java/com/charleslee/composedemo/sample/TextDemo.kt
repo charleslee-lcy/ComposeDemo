@@ -16,7 +16,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.LinkAnnotation
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextLinkStyles
 import androidx.compose.ui.text.TextStyle
@@ -26,9 +30,11 @@ import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.charleslee.composedemo.R
 import com.charleslee.composedemo.ui.theme.Pink80
 import com.charleslee.composedemo.ui.theme.Purple40
 import com.charleslee.composedemo.ui.theme.Purple80
@@ -148,16 +154,48 @@ fun TextExample() {
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
     )
+    Spacer(modifier = Modifier.height(10.dp))
+    // Display multiple links in the text
+    Text(
+        buildAnnotatedString {
+            append("Go to the ")
+            withLink(
+                LinkAnnotation.Url(
+                    "https://developer.android.com/",
+                    TextLinkStyles(style = SpanStyle(color = Color.Blue))
+                )
+            ) {
+                append("Android Developers ")
+            }
+            append("website, and check out the")
+            withLink(
+                LinkAnnotation.Url(
+                    "https://developer.android.com/jetpack/compose",
+                    TextLinkStyles(style = SpanStyle(color = Color.Green))
+                )
+            ) {
+                append("Compose guidance")
+            }
+            append(".")
+        }
+    )
 
-
-
-
-
-
-
-
-
-
+    val uriHandler = LocalUriHandler.current
+    Text(
+        buildAnnotatedString {
+            append("Build better apps faster with ")
+            val link =
+                LinkAnnotation.Url(
+                    "https://developer.android.com/jetpack/compose",
+                    TextLinkStyles(SpanStyle(color = Color.Blue))
+                ) {
+                    val url = (it as LinkAnnotation.Url).url
+                    // log some metrics
+                    uriHandler.openUri(url)
+                }
+            withLink(link) { append("Jetpack Compose") }
+        }
+    )
 
 
 
