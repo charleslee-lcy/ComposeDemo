@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
@@ -28,6 +30,7 @@ import com.charleslee.composedemo.sample.DrawerExample
 import com.charleslee.composedemo.sample.ListExample
 import com.charleslee.composedemo.sample.LoginScreen
 import com.charleslee.composedemo.sample.MediumTopAppBarExample
+import com.charleslee.composedemo.sample.TextExample
 import com.charleslee.composedemo.sample.testDialog
 import com.charleslee.composedemo.ui.theme.ComposeDemoTheme
 
@@ -48,6 +51,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String) {
     Column(
         modifier = Modifier
+            .verticalScroll(rememberScrollState())
             .fillMaxSize()
             .padding(start = 14.dp, end = 14.dp)
     ) {
@@ -65,11 +69,13 @@ fun Greeting(name: String) {
 //        DrawerExample {
 //            MediumTopAppBarExample()
 //        }
-        LoginScreen()
+//        LoginScreen()
 //        val data = 1..100
 //        ListExample(data.map {
 //            it.toString()
 //        })
+
+        TextExample()
     }
 }
 
