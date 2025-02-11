@@ -18,7 +18,12 @@ import androidx.compose.ui.tooling.preview.Devices.PIXEL_4
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.charleslee.composedemo.event.FlowConstant
+import com.charleslee.composedemo.sample.AnimatedVisibilitySharedElementBlurLayer
+import com.charleslee.composedemo.sample.AnimatedVisibilitySharedElementShortenedExample
 import com.charleslee.composedemo.sample.AnimationExample
+import com.charleslee.composedemo.sample.SharedElementExample
+import com.charleslee.composedemo.sample.SharedElementScope_CompositionLocal
+import com.charleslee.composedemo.sample.SharedElement_ManualVisibleControl
 import com.charleslee.composedemo.ui.theme.ComposeDemoTheme
 import kotlinx.coroutines.launch
 
@@ -38,9 +43,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    val context = LocalContext.current as ComponentActivity
     val scope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
+//    AnimatedVisibilitySharedElementShortenedExample()
+//    AnimatedVisibilitySharedElementBlurLayer()
     Column(
         modifier = Modifier
             .verticalScroll(scrollState)
@@ -68,17 +74,23 @@ fun Greeting(name: String) {
 //        })
 
 //        TextExample()
-        AnimationExample()
+//        AnimationExample()
+//        SharedElementExample()
+//        SharedElementScope_CompositionLocal()
+        SharedElement_ManualVisibleControl()
     }
 
-    FlowBus.with<String>(FlowConstant.UPDATE_HEIGHT).register(context) {
-        scope.launch {
-            scrollState.scrollTo(scrollState.maxValue)
+    if (LocalContext.current is ComponentActivity) {
+        val context = LocalContext.current as ComponentActivity
+        FlowBus.with<String>(FlowConstant.UPDATE_HEIGHT).register(context) {
+            scope.launch {
+                scrollState.scrollTo(scrollState.maxValue)
+            }
         }
     }
 }
 
-@Preview(showSystemUi = true, device = PIXEL_4)
+@Preview(showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     ComposeDemoTheme {

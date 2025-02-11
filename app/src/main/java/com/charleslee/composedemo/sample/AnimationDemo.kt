@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.charleslee.composedemo.event.FlowConstant
@@ -50,6 +51,7 @@ import kotlin.math.roundToInt
  * <p> Created by CharlesLee on 2025/2/10
  * 15708478830@163.com
  */
+@Preview(showSystemUi = true)
 @Composable
 fun AnimationExample() {
     val scope = rememberCoroutineScope()
