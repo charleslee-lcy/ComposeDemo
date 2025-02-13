@@ -1,4 +1,6 @@
-@file:OptIn(ExperimentalSharedTransitionApi::class, ExperimentalSharedTransitionApi::class)
+@file:OptIn(ExperimentalSharedTransitionApi::class, ExperimentalSharedTransitionApi::class,
+    ExperimentalSharedTransitionApi::class
+)
 
 package com.charleslee.composedemo.sample
 

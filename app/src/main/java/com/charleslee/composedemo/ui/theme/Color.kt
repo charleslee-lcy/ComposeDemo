@@ -15,3 +15,6 @@ val LavenderLight = Color(0xFFDDBEFC)
 
 val RoseDark = Color(0xffaf0060)
 val RoseLight = Color(0xFFFFAFC9)
+
+val LightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+val DarkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
